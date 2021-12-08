@@ -1,0 +1,50 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html{
+    color: white;
+    background-image: linear-gradient(rgba(224, 173, 182, 0.883), rgb(75, 58, 61));
+}
+#avatar{
+    position: relative;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;     
+    display: block;
+    margin: 1 auto;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}  
+hr {
+    width: 200px; 
+    margin: 6 auto;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+.icon{
+    opacity: 0.9;
+    position: relative;
+    font-family: 'Robot', sans-serif;
+    transition: top .3s;
+    top: 0;
+    margin: 0 auto;
+}
+a{
+    text-decoration: none;
+}
+.icon:hover{
+    opacity: 1.0; 
+    top: -2px;
+}
+h1{
+    margin: 5 auto;
+}
+p{
+    font-family: 'Robot', sans-serif;
+    font-size: 16px;
+}
