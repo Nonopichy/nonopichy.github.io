@@ -3,11 +3,11 @@
     margin: 0;
 }
 html{
-    color: rgb(0, 0, 0);
+    color: black;
     background-image: linear-gradient(rgba(219, 219, 219, 0.753), #7064dc50);
 }
 
-#avatar{
+.avatar{
 
  
     position: relative;
@@ -150,4 +150,14 @@ p{
     font-size: 16px;
 
     text-align: center;
+}
+#moon{
+    position:absolute;
+    bottom: 2%;
+    right: 2%;
+    transition: opacity .3s;
+    opacity: 0.7;
+}
+#moon:hover{
+    opacity: 1.0;
 }
