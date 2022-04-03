@@ -8,14 +8,16 @@ html{
 }
 
 .avatar{
-
- 
     position: relative;
     border-radius: 100px;
     height: 200px;
     width: 200px;     
     display: block;
     margin: 1 auto;
+}
+.avatar img {
+	   height: 250px;
+    width: 250px;  
 }
 .profile {
     display: flex;
