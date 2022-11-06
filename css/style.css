@@ -1,165 +1,47 @@
+@font-face { 
+    font-family: MontserratWeb;
+    src: url('../font/Montserrat-VariableFont_wght.ttf');
+} 
 *{
-    padding: 0;
+    background-color: black;
+    color: white;
     margin: 0;
-}
-html{
-    color: black;
-    background-image: linear-gradient(rgba(219, 219, 219, 0.753), #7064dc50);
-}
-
-.avatar{
-    position: relative;
-    border-radius: 100px;
-    height: 200px;
-    width: 200px;     
-    display: block;
-    margin: 1 auto;
-}
-.avatar img {
-	   height: 250px;
-    width: 250px;  
-}
-.profile {
-    display: flex;
     
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-
-    opacity: 0.8; 
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
-              0 2px 2px rgba(0,0,0,0.12), 
-              0 4px 4px rgba(0,0,0,0.12), 
-              0 8px 8px rgba(0,0,0,0.12),
-              0 16px 16px rgba(0,0,0,0.12);
-    max-width: 270;
-    min-width: 260;
-    margin: 0 auto;
-    transition: background-color .3s;
-}  
-hr {
-    width: 400;
-    margin: 6 auto;
-    border: 0;
-    border-top: 1px solid rgb(146, 146, 146);
+}
+.makise img{
+    float: right;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.title {
+    font-family: 'MontserratWeb';
+    font-size:2.5em;
+    margin: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px
+}
+.about {
+    font-family: 'MontserratWeb';
+    font-size:1.5em;
+    margin: 10px;
+    margin-top: 20px;
+    margin-left: 20px
+}
+.space{
+    width: 100%;
+    height: 10%;
+    max-width: 100%;
 }
 .icon{
-    opacity: 1.0;
-    position: relative;
-    font-family: 'Robot', sans-serif;
-    transition: top .3s;
-    top: 0;
-    margin: 0 auto;
+    margin-left: 10px; 
+    background-color: rgba(0, 0, 0, 0);
 }
-a{
-    text-decoration: none;
-}
-.icon:hover{
-    background-color: beige;
-    top: -2px;
-}
-h1{
-    margin: 5 auto;
-}
-p{
-    font-family: 'Robot', sans-serif;
-    font-size: 16px;
-}
-.icons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-
-    opacity: 0.8; 
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
-              0 2px 2px rgba(0,0,0,0.12), 
-              0 4px 4px rgba(0,0,0,0.12), 
-              0 8px 8px rgba(0,0,0,0.12),
-              0 16px 16px rgba(0,0,0,0.12);
-
-    max-width: 550;
-    min-width: 260;
-    margin: 10px auto;
-}  
-.icons p, h2{
-    font-family: 'Robot', sans-serif;
-    font-size: 16px;
-    color: black;
-    margin-left: 10px;
-    margin-top: 5px;
-}
-.card-left {
-
-    position: relative;
-    float: left;
-
-    opacity: 0.8; 
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
-              0 2px 2px rgba(0,0,0,0.12), 
-              0 4px 4px rgba(0,0,0,0.12), 
-              0 8px 8px rgba(0,0,0,0.12),
-              0 16px 16px rgba(0,0,0,0.12);
-    max-width: 500;
-    min-width: 280;
-    margin: auto;
-    margin-left: 10px;
-    transition: background-color .3s;
-}
-.card-right img{
-    max-height: 200;
-    max-width: 450;
+.navbar{
+    position: fixed;
+    bottom: 0;
     margin: 10px;
-    padding: 10px;
-}
-.card-left img{
-    max-height: 200;
-    max-width: 450;
-    margin: 10px;
-    padding: 10px;
-}
-.card-right {
-
-    position: relative;
-    float: right;
-
-    opacity: 0.8; 
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
-              0 2px 2px rgba(0,0,0,0.12), 
-              0 4px 4px rgba(0,0,0,0.12), 
-              0 8px 8px rgba(0,0,0,0.12),
-              0 16px 16px rgba(0,0,0,0.12);
-    max-width: 500;
-    min-width: 280;
-    margin: auto;
-    margin-right: 10px;
-    transition: background-color .3s;
-}
-.card-left p, h2{
-    
-    font-family: 'Robot', sans-serif;
-    font-size: 16px;
-
-    text-align: center;
-}
-.card-right p, h2{
-    
-    font-family: 'Robot', sans-serif;
-    font-size: 16px;
-
-    text-align: center;
-}
-#moon{
-    position:absolute;
-    bottom: 2%;
-    right: 2%;
-    transition: opacity .3s;
-    opacity: 0.7;
-}
-#moon:hover{
-    opacity: 1.0;
+    background-color: rgba(0, 0, 0, 0);
 }
