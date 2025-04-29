@@ -1,180 +1,393 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <title>Eu Nonopichy!</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta charset="UTF-8">
-      <style>
-         body {
-         background: linear-gradient(to top, #777777, white);
-         }
-         .all {
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         align-items: center;
-         height: 100vh;
-         padding-bottom: 30px;
-         }
-         .cc img {
-         margin-top: 2px;
-         margin-left: 4px;
-         width: 20pt;
-         height: 20pt;
-         transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
-         border-radius: 50%;
-         }
-         .cc img:hover {
-         transform: scale(1.1);
-         box-shadow: 0 0 5px 2px white;
-         border-radius: 10%;
-         }
-         .dev {
-         font-family: Arial, sans-serif;
-         font-weight: 900;
-         font-size: 72px;
-         color: black;
-         margin-left: 20px;
-         }
-         .down {
-         font-family: Arial, sans-serif;
-         font-weight: bold;
-         font-size: 24px;
-         color: black;
-         margin-left: 20px;
-         }
-         .footer {
-         position: fixed;
-         bottom: 0;
-         left: 0;
-         width: 100%;
-         background-color: #f1f1f1;
-         padding: 10px;
-         text-align: center;
-         font-size: 24px;
-         }
-         .projects-section {
-         background-color: #f9f9f9;
-         text-align: center;
-         margin-top: 50px;
-         padding-top: 20px;
-         padding-bottom: 50px;
-         border-radius: 10px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-         }
-         .projects-title {
-         font-family: Arial, sans-serif;
-         font-weight: bold;
-         font-size: 36px;
-         color: #333333;
-         margin-bottom: 20px;
-         }
-         .video-section {
-         display: flex;
-         flex-wrap: wrap;
-         justify-content: center;
-         align-items: flex-start;
-         margin-top: 20px;
-         }
-         .video-player {
-         width: 300px;
-         height: 200px;
-         margin: 10px;
-         border-radius: 10px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-         }
-         .video-player iframe {
-         width: 100%;
-         height: 100%;
-         border: none;
-         border-radius: 10px;
-         }
-         .video-title {
-         font-family: Arial, sans-serif;
-         font-style: italic;
-         font-size: 18px;
-         color: #333333;
-         margin-top: 10px;
-         }
-      </style>
-   </head>
-   <body>
-      <div class="all">
-         <div class="dev">DEVELOPER</div>
-         <div class="down">PocketMine, Spigot, Bukkit, Forge e Fabric</div>
-         <div class="down">+4 anos de experiência</div>
-         <div class="down">18 year in earth</div>
-         <div class="cc">
-            <a href="https://github.com/Nonopichy" target="_blank"><img src="git.png" alt="Git Icon"></a>
-            <a href="https://discord.com/invite/2GThK4UW4y" target="_blank"><img src="discord.png" alt="Discord Icon"></a>
-            <a href="mailto:nonopichycontato@gmail.com" target="_blank"><img src="mail.png" alt="Mail Icon"></a>
-         </div>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Nonopichy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  /* tipografia */
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  /* gradiente animado */
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background-size: 300% 300%;
+    animation: bgShift 20s ease infinite;
+  }
+
+  /* glassmorphism na navbar */
+  .navbar {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* botão com neumorphism */
+  .btn {
+    box-shadow:  4px 4px 8px rgba(0,0,0,0.2),
+                -4px -4px 8px rgba(255,255,255,0.1);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow:  2px 2px 4px rgba(0,0,0,0.2),
+                -2px -2px 4px rgba(255,255,255,0.1);
+  }
+
+  /* cards com vidro */
+  .about-item {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  /* scroll-reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; height:100%; overflow-x:hidden; scroll-behavior:smooth; }
+    body {
+      --bg: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+      --text: #fff;
+      --nav-bg: rgba(0,0,0,0.3);
+      --toggle-bg: rgba(255,255,255,0.2);
+      --water-bg: rgba(255,255,255,0.15);
+      --water-border: rgba(255,255,255,0.3);
+      background: var(--bg);
+      color: var(--text);
+      font-family:'Segoe UI',sans-serif;
+      position: relative;
+    }
+    body.dark { --bg: linear-gradient(135deg,#330000,#660000,#330000); --text: #fdd; --nav-bg: rgba(255,255,255,0.1); --toggle-bg: rgba(0,0,0,0.2); --water-bg: rgba(255,0,0,0.2); --water-border: rgba(255,0,0,0.5); }
+
+    /* common */
+    .social-icons { display:flex; justify-content:center; gap:1rem; margin-top:1.5rem; }
+    .social-icons a img { width:32px; height:32px; }
+
+    /* navbar */
+    .navbar { position: fixed; top:0; left:0; width:100%; height: 5%; display:flex; align-items:center; padding:1rem 2rem; background:var(--nav-bg); z-index:10; }
+    .navbar .links { display:flex; gap:1rem; }
+    .navbar .links a { color: var(--text); text-decoration:none; font-weight:500; }
+    #tracker { display:flex; gap:0.5rem; margin-left:auto; }
+    .tracker-item { width:30px; height:30px; background:#444; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:16px; }
+    body.dark .tracker-item { background:#333; }
+    .tracker-item.found { background: #4fc3f7; color:#0f2027; }
+    body.dark .tracker-item.found { background: #fdd; color:#330; }
+    .toggle-dark { background:var(--toggle-bg); border:none; padding:.5rem; margin-left:1rem; border-radius:50%; cursor:pointer; color:var(--text); }
+
+    /* scroll progress */
+    #scroll-progress { position: fixed; top:0; left:0; height:4px; background:#4fc3f7; width:0; z-index:11; }
+    /* back to top */
+    #back-to-top { position: fixed; bottom:1.5rem; right:1.5rem; background:#4fc3f7; color:#0f2027; border:none; padding:.75rem; border-radius:50%; font-size:1.25rem; cursor:pointer; display:none; z-index:10; }
+
+    /* hero & bubbles */
+    .hero { position:relative; width:100%; height:90vh; overflow:hidden; }
+    .bubbles { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; }
+    .bubbles.back { z-index:0; }
+    .bubbles.front{ z-index:2; }
+    .bubble { position:absolute; bottom:-150px; border-radius:50%; background-size:cover; background-position:center; animation:rise var(--dur,10s) linear var(--delay,0s) forwards; transform:translate(0,0); transition:transform .3s ease-out, opacity .3s ease-out; }
+    .bubble.rem { cursor:pointer; pointer-events:auto; }
+    .bubble.water { background:var(--water-bg); border:1px solid var(--water-border); cursor:default; pointer-events:none; }
+    @keyframes rise {0%{bottom:-150px;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{bottom:120vh;opacity:0;}}
+
+    /* hero content */
+    .content { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; height:100%; padding:2rem; }
+    .text { max-width:400px; margin-right:2rem; text-align:left; }
+    .text h1 { font-size:3rem; margin-bottom:.5rem; }
+    .text h1 span { color:#4fc3f7; }
+    .text p { font-size:1.1rem; margin-bottom:1.5rem; line-height:1.4; }
+    .btn { display:inline-block; padding:.75rem 1.5rem; border:2px solid #4fc3f7; border-radius:30px; color:#4fc3f7; text-decoration:none; font-weight:bold; transition:background .3s,color .3s; }
+    .btn:hover { background:#4fc3f7; color:#0f2027; }
+    .hero-img { max-width:300px; border-radius:12px; box-shadow:0 8px 16px rgba(0,0,0,0.5); }
+    .scroll-down { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); font-size:2rem; color:var(--text); animation:bounce 2s infinite; }
+    @keyframes bounce {0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,10px);} }
+
+    /* "Onde tem meu toque" section */
+    .onde-mim { background:#fff8e1; color:#333; padding:3rem 2rem; border-radius:12px; margin:2rem auto; max-width:1000px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+    .onde-mim h2 { font-size:2rem; text-align:center; margin-bottom:1.5rem; color:#ff8a65; }
+    .onde-mim .about-content { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem; }
+    .onde-mim .about-item { background:#fff3e0; border:2px dashed #ffcc80; border-radius:8px; padding:1rem; text-align:center; }
+    .onde-mim .about-item img { width:100%; height:180px; object-fit:cover; border-radius:8px; }
+    .onde-mim .about-item p { margin-top:0.75rem; font-size:0.95rem; }
+
+    /* "Sobre Mim" cute section */
+    .fofo { background:#fce4ec; color:#880e4f; padding:3rem 2rem; border-radius:16px; margin:2rem auto; max-width:800px; box-shadow:0 4px 12px rgba(136,14,79,0.2); }
+    .fofo h2 { font-size:2.2rem; text-align:center; margin-bottom:1rem; font-family:'Comic Sans MS', cursive, sans-serif; }
+    .fofo .about-content { display:flex; flex-direction:column; gap:1rem; }
+    .fofo .about-item { display:flex; align-items:center; gap:1rem; background:#f8bbd0; padding:1rem; border-radius:12px; }
+    .fofo .about-item img { width:80px; height:80px; object-fit:cover; border-radius:50%; border:2px solid #f48fb1; }
+    .fofo .about-item p { font-size:1rem; line-height:1.4; }
+
+    /* homenagem */
+    .tributo { background:#222; color:#fff; padding:2rem; font-size:1rem; line-height:1.6; }
+    .tributo h2 { font-size:1.5rem; text-align:center; margin-bottom:1rem; }
+    .tributo ul { list-style:none; padding:0; max-width:600px; margin:0 auto; }
+    .tributo li { margin:0.5rem 0; }
+
+    /* contato/footer */
+    #more-content { background:#fff; color:#333; padding:4rem 2rem; min-height:30vh; }
+    footer { text-align:center; padding:1rem 0; color:var(--text); font-size:0.9rem; background:var(--nav-bg); }
+  </style>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <nav class="navbar">
+    <div class="links">
+      <a href="#hero">Topo</a>
+      <a href="#onde">Onde</a>
+      <a href="#sobre-mim">Eu</a>
+	  <a href="#tributo">Homenagem</a>
+    </div>
+    <div id="tracker"></div>
+    <button class="toggle-dark" id="toggle-dark">🌓</button>
+  </nav>
+
+  <button id="back-to-top" title="Topo">↑</button>
+
+  <section id="hero" class="hero">
+    <div class="bubbles back" id="bubbles-back"></div>
+    <div class="content">
+      <div class="text">
+        <h1><span>Nonopichy</span></h1>
+        <p>19 anos | Desenvolvedor | +4 anos de experiência</p>
+        <p>Tempo não é valor. Como também, volume não é massa. Acorde, abra seus olhos.<br>E faça da sua vida uma estória.</p>
+        <a href="#onde" class="btn">Conheça mais</a>
       </div>
-   <div class="projects-section">
-         <div class="projects-title">Principais Projetos Públicos</div>
-         <div class="video-section">
-            <div class="video-player">
-              
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/capeall"> <img src="img/capeall.png" style="width: 200px; height 100px;"></a>
-			   </img>
-               <div class="video-title">Free Cape Online 2024<br>(1.8.9 & 1.12.2 Forge)</div>
-            </div>
-      
-         </div>
+      <img src="hero.png" alt="Minha foto" class="hero-img"/>
+    </div>
+    <div class="bubbles front" id="bubbles-front"></div>
+    <div class="scroll-down">⌄</div>
+  </section>
+
+  <section class="onde-mim" id="onde">
+    <h2>Onde tem meu toque</h2>
+    <div class="about-content">
+      <div class="about-item">
+        <img src="https://cdn.discordapp.com/icons/490380290355757086/63e4f3ad9f692be7d1e9e50437a0919a.webp?size=1024" alt="EnixStudios"/>
+        <p>Desenvolvi todos os sistemas internos dos servidores da RedeWarriors.<br>2024 - 2025</p>
       </div>
-      <div class="projects-section">
-         <div class="projects-title">Projetos com Influencers (2022)</div>
-         <div class="video-section">
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QpryDr_b_-M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Utilizando Forge... 1.18.1</div>
-            </div>
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/4vaRUKF3i9s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Utilizando Forge... 1.18.1</div>
-            </div>
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/0KeUAvL8AxM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Utilizando Fabric... 1.18.2</div>
-            </div>
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/E3jKhdBnE84" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Utilizando Fabric... 1.18.2</div>
-            </div>
-         </div>
+      <div class="about-item">
+        <img src="https://cdn.discordapp.com/icons/803712471302012939/fb65691b5536019efe32c386e660220e.webp?size=1024" alt="BrPacks"/>
+        <p>Desenvolvi projetos para influenciadores através da BrPacks.<br>2021 - 2022</p>
       </div>
-      <div class="projects-section">
-         <div class="projects-title">Projetos Criativos (2022)</div>
-         <div class="video-section">
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/sN8XGbrxXN0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Executar/Criar magias... 1.16.5 Plugin</div>
-            </div>
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/6uSKqTv5tQc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Cutscene/Interação/História... 1.12.2 Plugin</div>
-            </div>
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/KcQhbsTFO-8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Cutscene/Interação/História... 1.12.2 Plugin</div>
-            </div>
-            <div class="video-player">
-               <iframe width="100%" height="100%" src="https://www.youtube.com/embed/eXhDsduN5oI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div class="video-title">Oh Alek! 1.18.2 Fabric</div>
-            </div>
-         </div>
+      <div class="about-item">
+        <img src="git.png" alt="Projetos"/>
+        <p>Já desenvolvi centenas de projetos privados e alguns poucos públicos.<br>2020 - 2023</p>
       </div>
-      <div class="all">
-      <div class="dev">HOMENAGEM</div>
-      <div class="down">(Meu avô) Antônio ..................... 16/06/22</div>
-      <div class="down">(Um "amigo") NegãoSpartacus ............... 06/03/23</div>
-      <div class="down">(Pai do EiMine) Lorivaldo .................... 08/12/21</div>
-      <div class="down">(Pet Fêmea) Minuscula .................... 18/10/21</div>
-      <div class="down">(Pet Macho) Neguinho ..................... 15/03/23</div>
-      <div class="down">(Pet Macho) Nininho ...................... ??/06/22</div>
-      <div class="down">(Pet de Rua Macho) Coviske ...................... 31/03/22</div>
-      <div class="down">(Pet Femea) Pokinha/Tchutchukinha ...................... 24/06/24</div>
-      <div class="down">(Pet Macho) Peludinho ...................... 2?/08/24</div>
-      <div class="down">Caso eu morra tem um vídeo programado de out 2022...</div>
-   </body>
+    </div>
+  </section>
+  
+  <section class="fofo" id="sobre-mim">
+    <h2>Sobre Mim</h2>
+    <div class="about-content">
+      <div class="about-item">
+        <img src="rrr.png" alt="Perfil"/>
+        <p>Jogador de major, level 22 gc, level 11 faceit e 36k no MM.</p>
+      </div>
+      <div class="about-item">
+        <img src="fff.png" alt="Skills"/>
+        <p>Cinco faculdades, seis graduações e dois ensino médios.</p>
+      </div>
+      <div class="about-item">
+        <img src="mmm.png" alt="Hobbies"/>
+        <p>Fã de algum dorama, fã de algum filme e fã de alguma série.</p>
+      </div>
+    </div>
+    <div class="social-icons">
+      <a href="https://github.com/nonopichy" target="_blank"><img src="github.png" alt="GitHub"/></a>
+      <a href="https://discord.com/users/870765095179939960" target="_blank"><img src="dc.png" alt="Discord"/></a>
+      <a href="mailto:nonopichycontato@gmail.com"><img src="mail.png" alt="Email"/></a>
+    </div>
+  </section>
+
+  <section class="tributo" id="tributo">
+    <h2>Homenagem</h2>
+    <ul>
+      <li>(Meu avô) Antônio — 16/06/22</li>
+      <li>(Um "amigo") NegãoSpartacus — 06/03/23</li>
+      <li>(Pai do EiMine) Lorivaldo — 08/12/21</li>
+      <li>(Pet Fêmea) Minuscula — 18/10/21</li>
+      <li>(Pet Macho) Neguinho — 15/03/23</li>
+      <li>(Pet Macho) Nininho — ??/06/22</li>
+      <li>(Pet de Rua Macho) Coviske — 31/03/22</li>
+      <li>(Pet Fêmea) Pokinha/Tchutchukinha — 24/06/24</li>
+      <li>(Pet Macho) Peludinho — 2?/08/24</li>
+    </ul>
+    <p style="text-align:center;">Caso eu morra, tem um vídeo programado de out/2022.</p>
+  </section>
+
+
+  <footer>&copy; 2025 Nonopichy. Todos os direitos reservados.</footer>
+
+  <audio id="pop-sound" src="pop.mp3" preload="auto"></audio>
+
+<script>
+  // configs
+  const remImagesLight = ['0.png','1.png','2.png','3.png','4.png','5.png','6.png','7.png'];
+  const remImagesDark  = ['d0.png','d1.png','d2.png','d3.png','d4.png'];
+  const remCount       = remImagesLight.length;
+  const waterCount     = 35;
+  const popSpeedThr    = 2000;
+  const infRad         = 200;
+  const infMag         = 10.0;
+
+  let foundSet = new Set();
+  let currentList = [];
+  let lastMouse = { x:0, y:0, t:performance.now() };
+  const front    = document.getElementById('bubbles-front');
+  const back     = document.getElementById('bubbles-back');
+  const popSound = document.getElementById('pop-sound');
+  const progBar  = document.getElementById('scroll-progress');
+  const back2top = document.getElementById('back-to-top');
+  const toggleDM = document.getElementById('toggle-dark');
+  const tracker  = document.getElementById('tracker');
+
+  function initTracker() {
+    tracker.innerHTML = '';
+    currentList = document.body.classList.contains('dark') ? remImagesDark : remImagesLight;
+    currentList.forEach(() => {
+      const div = document.createElement('div');
+      div.className = 'tracker-item';
+      div.textContent = '?';
+      tracker.appendChild(div);
+    });
+  }
+
+  function pickRem() {
+    if (foundSet.size >= currentList.length) return null;
+    const ok = currentList.filter(s => countRemOnScreen(s) < 2);
+    return ok.length
+      ? ok[Math.floor(Math.random() * ok.length)]
+      : currentList[Math.floor(Math.random() * currentList.length)];
+  }
+
+  function countRemOnScreen(src) {
+    return Array.from(front.children).filter(b => b._img === src).length;
+  }
+
+  function spawn(type) {
+    if (type === 'rem' && foundSet.size >= currentList.length) return;
+    const container = type === 'rem' ? front : back;
+    const b = document.createElement('div');
+    b.className = 'bubble ' + type;
+    b._type = type;
+    if (type === 'rem') {
+      const img = pickRem();
+      b._img = img;
+      b.style.backgroundImage = `url('${img}')`;
+    }
+    b.style.bottom = '-150px';
+    b.style.transform = '';
+    const size = 40 + Math.random() * 80;
+    b.style.width = b.style.height = size + 'px';
+    b.style.left = Math.random() * 100 + 'vw';
+    const dur = 8 + Math.random() * 10;
+    b.style.setProperty('--dur', dur + 's');
+    b.style.setProperty('--delay', -Math.random() * dur + 's');
+    b.addEventListener('animationend', () => { b.remove(); spawn(type); });
+    if (type === 'rem') {
+      b.addEventListener('click', e => {
+        e.stopPropagation();
+        const idx = currentList.indexOf(b._img);
+        if (idx !== -1 && !foundSet.has(b._img)) {
+          foundSet.add(b._img);
+          updateTracker(idx);
+        }
+        popBubble(b, true);
+      });
+    }
+    container.appendChild(b);
+  }
+
+  function initBubbles() {
+    foundSet.clear();
+    initTracker();
+    front.innerHTML = '';
+    back.innerHTML = '';
+    for (let i = 0; i < waterCount; i++) spawn('water');
+    for (let i = 0; i < remCount;   i++) spawn('rem');
+  }
+
+  function updateTracker(idx) {
+    const item = tracker.children[idx];
+    if (item) {
+      item.classList.add('found');
+      item.textContent = '';
+      item.style.backgroundImage = `url('${currentList[idx]}')`;
+      item.style.backgroundSize = 'cover';
+    }
+  }
+
+  function popBubble(b, withSound) {
+    if (b._p) return;
+    b._p = true;
+    b.style.animation = 'none';
+    b.style.transform = 'scale(2)';
+    b.style.opacity = '0';
+    if (withSound) { popSound.currentTime = 0; popSound.play(); }
+    b.addEventListener('transitionend', () => { const t = b._type; b.remove(); spawn(t); }, { once: true });
+  }
+
+  function handleMouse(e, isClick) {
+    const now = performance.now();
+    const dx = e.clientX - lastMouse.x;
+    const dy = e.clientY - lastMouse.y;
+    const dt = now - lastMouse.t || 16;
+    const speed = Math.hypot(dx, dy) / (dt / 16);
+    lastMouse = { x: e.clientX, y: e.clientY, t: now };
+
+    document.querySelectorAll('.bubble').forEach(b => {
+      const r = b.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dist = Math.hypot(cx - e.clientX, cy - e.clientY);
+
+      if (dist < r.width / 2) {
+        if (!isClick && speed > popSpeedThr) popBubble(b, false);
+        return;
+      }
+      if (!isClick && dist < infRad) {
+        const f = (1 - dist / infRad) * infMag;
+        b.style.transform = `translate(${dx * f}px, ${dy * f}px)`;
+        clearTimeout(b._r);
+        b._r = setTimeout(() => b.style.transform = '', 200);
+      }
+    });
+  }
+
+  function onScroll() {
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    progBar.style.width = (window.scrollY / dh * 100) + '%';
+    back2top.style.display = window.scrollY > 400 ? 'block' : 'none';
+  }
+
+  back2top.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  toggleDM.onclick = () => { document.body.classList.toggle('dark'); localStorage.dark = document.body.classList.contains('dark'); initBubbles(); };
+  if (localStorage.dark === 'true') document.body.classList.add('dark');
+
+  window.addEventListener('load', initBubbles);
+  window.addEventListener('mousemove', e => handleMouse(e, false));
+  window.addEventListener('click', e => handleMouse(e, true));
+  window.addEventListener('scroll', onScroll);
+</script>
+
+
+</body>
 </html>
