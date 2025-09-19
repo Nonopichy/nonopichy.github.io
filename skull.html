@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Gerador de Skull NBT</title>
+<style>
+  :root{--bg:#0f1724;--card:#111827;--muted:#9aa4b2;--accent:#60a5fa}
+  *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+  body{margin:0;background:linear-gradient(180deg,#071023 0%, #081126 100%);color:#e6eef8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{width:100%;max-width:820px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:20px 22px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+  h1{margin:0 0 8px;font-size:20px}
+  p.lead{margin:0 0 18px;color:var(--muted);font-size:13px}
+  .row{display:flex;gap:12px;margin-bottom:12px}
+  .col{flex:1;min-width:0}
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+  input[type="text"]{width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:inherit;font-size:14px}
+  button{background:var(--accent);border:none;color:#07233b;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+  button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+  .outputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  textarea, .output{width:100%;min-height:78px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:#061427;color:#dff0ff;font-family:monospace;font-size:13px;resize:vertical}
+  .small{font-size:12px;color:var(--muted);margin-top:6px}
+  .controls{display:flex;gap:8px;align-items:center;margin-top:12px}
+  .footer{margin-top:14px;color:var(--muted);font-size:12px}
+  .copy-ok{color:#4ade80;margin-left:8px;font-weight:700}
+  @media (max-width:640px){.outputs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="card" role="main">
+    <h1>Gerador de Skull NBT (1.7.10)</h1>
+    <p class="lead">
+      Obtenha links de texturas mojang aqui: 
+      <a href="https://minecraft-heads.com/custom-heads" target="_blank">
+        minecraft-heads.com
+      </a>
+    </p>
+
+    <div class="row">
+      <div class="col">
+        <label for="nick">Nick</label>
+        <input id="nick" type="text" placeholder="Nome do jogador (ex: Steve)" value="Steve" />
+      </div>
+      <div class="col">
+        <label for="link">Link (URL da skin)</label>
+        <input id="link" type="text" placeholder="https://..." value="https://textures.minecraft.net/texture/EXEMPLO" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="itemName">Nome do Item (opcional)</label>
+        <input id="itemName" type="text" placeholder="&6Espada Lendária" />
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="genBtn">Gerar comando</button>
+      <button id="copyBtn" class="ghost">Copiar comando</button>
+      <div id="copied" class="copy-ok" style="display:none">Copiado!</div>
+    </div>
+
+    <div class="outputs" aria-live="polite">
+      <div>
+        <label>Encode (Base64)</label>
+        <textarea id="encodeOut" readonly></textarea>
+        <div class="small">String usada para o encode: <code id="rawString" style="color:var(--muted)"></code></div>
+      </div>
+      <div>
+        <label>UUID (v5 determinística)</label>
+        <div class="output" id="uuidOut" style="padding:10px;min-height:78px;display:flex;align-items:center"></div>
+        <div class="small">UUID gerada a partir do SHA-1 do encode.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <label>Comando final</label>
+      <textarea id="cmdOut" readonly></textarea>
+      <div class="small">Formato: <code>force &lt;nick&gt; /give &lt;nick&gt; skull 1 3 {display:{Name:"..."},SkullOwner:{Id:&lt;uuid&gt;,Properties:{textures:[{Value:&lt;encode&gt;}]}}}</code></div>
+    </div>
+
+    <div class="footer">Feito rápido — UUID é deterministicamente derivada do encode; se você usar a mesma URL recebe a mesma UUID.</div>
+  </div>
+
+<script>
+(async function(){
+  function utf8ToBase64(str){
+    const enc = new TextEncoder();
+    const bytes = enc.encode(str);
+    let binary = '';
+    const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+    }
+    return btoa(binary);
+  }
+
+  async function sha1Bytes(dataUint8){
+    const hashBuf = await crypto.subtle.digest('SHA-1', dataUint8);
+    return new Uint8Array(hashBuf);
+  }
+
+  function bytesToUuid(bytes){
+    const b = bytes.slice(0,16);
+    b[6] = (b[6] & 0x0f) | 0x50;
+    b[8] = (b[8] & 0x3f) | 0x80;
+    const hex = Array.from(b).map(x => x.toString(16).padStart(2,'0')).join('');
+    return `${hex.substr(0,8)}-${hex.substr(8,4)}-${hex.substr(12,4)}-${hex.substr(16,4)}-${hex.substr(20,12)}`;
+  }
+
+  const nickEl = document.getElementById('nick');
+  const linkEl = document.getElementById('link');
+  const itemNameEl = document.getElementById('itemName');
+  const genBtn = document.getElementById('genBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const encodeOut = document.getElementById('encodeOut');
+  const uuidOut = document.getElementById('uuidOut');
+  const cmdOut = document.getElementById('cmdOut');
+  const rawStringEl = document.getElementById('rawString');
+  const copied = document.getElementById('copied');
+
+  function buildRawString(link){
+    return '{textures:{SKIN:{url:"' + link + '"}}}';
+  }
+/**
+ * Gera um nick de Minecraft determinístico baseado em uma UUID
+ * @param {string} uuid - UUID no formato 00000000-0000-0000-0000-000000000000
+ * @returns {string} nick gerado
+ */
+function nickFromUUID(uuid) {
+  // remove traços e mantém apenas hex
+  const clean = uuid.replace(/-/g, "");
+
+  // tabela de caracteres permitidos em nicks do Minecraft
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+
+  let nick = "";
+  for (let i = 0; i < clean.length; i += 2) {
+    const hexPair = clean.substring(i, i + 2);
+    const num = parseInt(hexPair, 16);
+    nick += chars[num % chars.length];
+  }
+
+  // tamanho máximo oficial é 16
+  if (nick.length > 16) {
+    nick = nick.substring(0, 16);
+  }
+
+  return nick;
+}
+
+  async function generate(){
+    const nick = (nickEl.value || '').trim();
+    const link = (linkEl.value || '').trim();
+    const itemName = (itemNameEl.value || '').trim().replace(/&/g, "§");
+
+    if(!nick){
+      alert('Informe um nick válido.');
+      nickEl.focus();
+      return;
+    }
+    if(!link){
+      alert('Informe a URL da skin.');
+      linkEl.focus();
+      return;
+    }
+
+    const raw = buildRawString(link);
+    rawStringEl.textContent = raw;
+
+    const base64 = utf8ToBase64(raw);
+    encodeOut.value = base64;
+
+    const encoder = new TextEncoder();
+    const inputBytes = encoder.encode(base64);
+    const hash = await sha1Bytes(inputBytes);
+    const uuid = bytesToUuid(hash);
+    uuidOut.textContent = uuid;
+
+    // monta comando
+    const displayPart = itemName ? `display:{Name:"${itemName}"},` : "";
+	const a = nickFromUUID(uuid);
+    const cmd = `force ${nick} /give ${nick} skull 1 3 {${displayPart}SkullOwner:{Id:${uuid},Name:${a},Properties:{textures:[{Value:${base64},Signature:""}]}}}`;
+    cmdOut.value = cmd;
+    copied.style.display = 'none';
+  }
+
+  genBtn.addEventListener('click', generate);
+  copyBtn.addEventListener('click', async () => {
+    const txt = cmdOut.value;
+    if(!txt) return;
+    try {
+      await navigator.clipboard.writeText(txt);
+      copied.style.display = 'inline';
+      setTimeout(()=> copied.style.display='none',1500);
+    } catch(e){
+      cmdOut.select();
+      document.execCommand('copy');
+      copied.style.display = 'inline';
+      setTimeout(()=> copied.style.display='none',1500);
+    }
+  });
+
+  await generate();
+})();
+</script>
+</body>
+</html>
