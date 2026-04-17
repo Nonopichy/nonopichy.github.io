@@ -120,30 +120,76 @@
     @keyframes bounce {0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,10px);} }
 
     /* "Onde tem meu toque" section */
-    .onde-mim { background:#fff8e1; color:#333; padding:3rem 2rem; border-radius:12px; margin:2rem auto; max-width:1000px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-    .onde-mim h2 { font-size:2rem; text-align:center; margin-bottom:1.5rem; color:#ff8a65; }
-    .onde-mim .about-content { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem; }
-    .onde-mim .about-item { background:#fff3e0; border:2px dashed #ffcc80; border-radius:8px; padding:1rem; text-align:center; }
-    .onde-mim .about-item img { width:100%; height:180px; object-fit:cover; border-radius:8px; }
-    .onde-mim .about-item p { margin-top:0.75rem; font-size:0.95rem; }
+    .onde-mim { background:linear-gradient(135deg,#fff8e1,#ffe0b2); color:#333; padding:3.5rem 2rem; border-radius:20px; margin:3rem auto; max-width:1200px; box-shadow:0 10px 30px rgba(0,0,0,0.15); position:relative; overflow:hidden; }
+    .onde-mim::before { content:''; position:absolute; top:-50%; right:-10%; width:300px; height:300px; background:radial-gradient(circle, rgba(255,138,101,0.2), transparent 70%); border-radius:50%; }
+    .onde-mim h2 { font-size:2.4rem; text-align:center; margin-bottom:0.5rem; color:#e65100; font-weight:800; letter-spacing:-0.5px; position:relative; }
+    .onde-mim .subtitle { text-align:center; color:#8d6e63; margin-bottom:2rem; font-size:1rem; position:relative; }
+    .onde-mim .about-content { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:1.5rem; position:relative; }
+    .onde-mim .about-item { background:#fff; border:1px solid rgba(255,138,101,0.2); border-radius:16px; padding:1.25rem; text-align:center; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; position:relative; overflow:hidden; }
+    .onde-mim .about-item:hover { transform:translateY(-6px); box-shadow:0 12px 24px rgba(230,81,0,0.18); border-color:#ff8a65; }
+    .onde-mim .about-item img { width:100%; height:170px; object-fit:cover; border-radius:12px; }
+    .onde-mim .about-item p { margin-top:0.75rem; font-size:0.95rem; color:#444; }
+    .onde-mim .about-item .year { display:inline-block; margin-top:0.6rem; padding:0.25rem 0.75rem; background:#ff8a65; color:#fff; border-radius:20px; font-size:0.8rem; font-weight:600; letter-spacing:0.3px; }
+    .onde-mim .about-item.empty { background:repeating-linear-gradient(45deg,#fff3e0,#fff3e0 10px,#ffe0b2 10px,#ffe0b2 20px); border:2px dashed #ffb74d; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:260px; color:#bf6f2a; font-weight:600; }
+    .onde-mim .about-item.empty .plus { font-size:2.5rem; line-height:1; margin-bottom:0.3rem; }
 
     /* "Sobre Mim" cute section */
-    .fofo { background:#fce4ec; color:#880e4f; padding:3rem 2rem; border-radius:16px; margin:2rem auto; max-width:800px; box-shadow:0 4px 12px rgba(136,14,79,0.2); }
-    .fofo h2 { font-size:2.2rem; text-align:center; margin-bottom:1rem; font-family:'Comic Sans MS', cursive, sans-serif; }
+    .fofo { background:linear-gradient(135deg,#fce4ec,#f8bbd0); color:#880e4f; padding:3.5rem 2rem; border-radius:20px; margin:3rem auto; max-width:900px; box-shadow:0 10px 30px rgba(136,14,79,0.2); }
+    .fofo h2 { font-size:2.4rem; text-align:center; margin-bottom:1.5rem; font-weight:800; letter-spacing:-0.5px; }
     .fofo .about-content { display:flex; flex-direction:column; gap:1rem; }
-    .fofo .about-item { display:flex; align-items:center; gap:1rem; background:#f8bbd0; padding:1rem; border-radius:12px; }
-    .fofo .about-item img { width:80px; height:80px; object-fit:cover; border-radius:50%; border:2px solid #f48fb1; }
-    .fofo .about-item p { font-size:1rem; line-height:1.4; }
+    .fofo .about-item { display:flex; align-items:center; gap:1.25rem; background:rgba(255,255,255,0.6); padding:1.25rem; border-radius:16px; transition:transform .3s ease, background .3s ease; }
+    .fofo .about-item:hover { transform:translateX(6px); background:rgba(255,255,255,0.85); }
+    .fofo .about-item img { width:80px; height:80px; object-fit:cover; border-radius:50%; border:3px solid #f48fb1; flex-shrink:0; }
+    .fofo .about-item p { font-size:1rem; line-height:1.5; }
 
     /* homenagem */
-    .tributo { background:#222; color:#fff; padding:2rem; font-size:1rem; line-height:1.6; }
-    .tributo h2 { font-size:1.5rem; text-align:center; margin-bottom:1rem; }
+    .tributo { background:linear-gradient(135deg,#1a1a1a,#2c2c2c); color:#eee; padding:3rem 2rem; font-size:1rem; line-height:1.6; margin:3rem auto; max-width:800px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+    .tributo h2 { font-size:2rem; text-align:center; margin-bottom:1.5rem; color:#ccc; letter-spacing:2px; font-weight:300; }
     .tributo ul { list-style:none; padding:0; max-width:600px; margin:0 auto; }
-    .tributo li { margin:0.5rem 0; }
+    .tributo li { margin:0.6rem 0; padding:0.6rem 1rem; background:rgba(255,255,255,0.05); border-left:3px solid #555; border-radius:4px; transition:border-color .3s, background .3s; }
+    .tributo li:hover { border-left-color:#4fc3f7; background:rgba(255,255,255,0.08); }
 
     /* contato/footer */
     #more-content { background:#fff; color:#333; padding:4rem 2rem; min-height:30vh; }
     footer { text-align:center; padding:1rem 0; color:var(--text); font-size:0.9rem; background:var(--nav-bg); }
+
+    /* responsivo — mobile */
+    @media (max-width: 768px) {
+      .navbar { padding:0.6rem 1rem; height:auto; flex-wrap:wrap; gap:0.5rem; }
+      .navbar .links { gap:0.6rem; flex-wrap:wrap; font-size:0.9rem; }
+      #tracker { margin-left:auto; flex-wrap:wrap; gap:0.3rem; max-width:60%; justify-content:flex-end; }
+      .tracker-item { width:22px; height:22px; font-size:12px; }
+      .toggle-dark { margin-left:0.5rem; padding:0.35rem; }
+
+      .hero { height:auto; min-height:100vh; padding:5rem 1rem 3rem; }
+      .content { flex-direction:column-reverse; padding:1rem; gap:1.5rem; text-align:center; }
+      .text { margin-right:0; text-align:center; max-width:100%; }
+      .text h1 { font-size:2.2rem; }
+      .text p { font-size:1rem; }
+      .hero-img { max-width:220px; width:70%; }
+      .scroll-down { display:none; }
+
+      .onde-mim, .fofo, .tributo { margin:1.5rem 0.75rem; padding:2rem 1.25rem; border-radius:16px; }
+      .onde-mim h2, .fofo h2, .tributo h2 { font-size:1.8rem; }
+      .onde-mim .about-content { grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:1rem; }
+      .onde-mim .about-item img { height:130px; }
+      .onde-mim .about-item.empty { min-height:200px; }
+
+      .fofo .about-item { flex-direction:column; text-align:center; gap:0.75rem; padding:1rem; }
+      .fofo .about-item:hover { transform:none; }
+      .fofo .about-item img { width:70px; height:70px; }
+
+      .tributo li { font-size:0.9rem; padding:0.5rem 0.75rem; }
+
+      #back-to-top { bottom:1rem; right:1rem; padding:0.6rem; }
+    }
+
+    @media (max-width: 420px) {
+      .navbar .links a { font-size:0.8rem; }
+      #tracker { display:none; }
+      .text h1 { font-size:1.8rem; }
+      .onde-mim .about-content { grid-template-columns:1fr 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -166,7 +212,7 @@
     <div class="content">
       <div class="text">
         <h1><span>Nonopichy</span></h1>
-        <p>19 anos | Desenvolvedor | +4 anos de experiência</p>
+        <p>20 anos | Desenvolvedor | +4 anos de experiência</p>
         <p>Tempo não é valor. Como também, volume não é massa. Acorde, abra seus olhos.<br>E faça da sua vida uma estória.</p>
         <a href="#onde" class="btn">Conheça mais</a>
       </div>
@@ -178,18 +224,27 @@
 
   <section class="onde-mim" id="onde">
     <h2>Onde tem meu toque</h2>
+    <p class="subtitle">Empresas, projetos e colaborações ao longo da jornada</p>
     <div class="about-content">
       <div class="about-item">
-        <img src="https://cdn.discordapp.com/icons/490380290355757086/63e4f3ad9f692be7d1e9e50437a0919a.webp?size=1024" alt="EnixStudios"/>
-        <p>Desenvolvi todos os sistemas internos dos servidores da RedeWarriors.<br>2024 - 2025</p>
+        <img src="rw.png" alt="EnixStudios"/>
+        <p>Desenvolvi todos os sistemas internos dos servidores da RedeWarriors.</p>
+        <span class="year">2024 - 2025</span>
       </div>
       <div class="about-item">
         <img src="https://cdn.discordapp.com/icons/803712471302012939/fb65691b5536019efe32c386e660220e.webp?size=1024" alt="BrPacks"/>
-        <p>Desenvolvi projetos para influenciadores através da BrPacks.<br>2021 - 2022</p>
+        <p>Desenvolvi projetos para influenciadores através da BrPacks.</p>
+        <span class="year">2021 - 2022</span>
       </div>
       <div class="about-item">
         <img src="git.png" alt="Projetos"/>
-        <p>Já desenvolvi centenas de projetos privados e alguns poucos públicos.<br>2020 - 2023</p>
+        <p>Já desenvolvi centenas de projetos privados e alguns poucos públicos.</p>
+        <span class="year">2020 - 2023</span>
+      </div>
+     <div class="about-item">
+        <img src="cbbm.png" alt="CobblemonCentral"/>
+        <p>Desenvolvi a ranqueada e alguns sistema para o Cobblemon Central.</p>
+        <span class="year">2025 - 2026</span>
       </div>
     </div>
   </section>
@@ -236,7 +291,7 @@
   </section>
 
 
-  <footer>&copy; 2025 Nonopichy. Todos os direitos reservados.</footer>
+  <footer>&copy; 2026 Nonopichy. Todos os direitos reservados.</footer>
 
   <audio id="pop-sound" src="pop.mp3" preload="auto"></audio>
 
