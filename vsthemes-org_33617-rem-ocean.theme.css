@@ -15,7 +15,6 @@
     --guildchanneltransparency: 0.2;
     --memberlistransparency: 0;
     --accentcolor: 71,171,238;
-    --background: url("https://vsthemes.org/uploads/posts/2021-06/1622812520_1581997123_4k-anime_vsthemes_ru-14.webp");
     --backdrop: rgba(0,0,0,0.2);
     --backgroundblur: 0px;
     --popoutblur: 0px;
@@ -24,4 +23,10 @@
     --backgroundsize: cover;
     --popoutsize: cover;
     --backdropsize: cover;
+}
+
+.app__160d8 {
+    background-image: url(https://vsthemes.org/uploads/posts/2021-06/1622812520_1581997123_4k-anime_vsthemes_ru-14.webp);
+    background-size: cover;
+    background-color: transparent;
 }
