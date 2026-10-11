@@ -92,6 +92,13 @@
     body.dark .tracker-item.found { background: #fdd; color:#330; }
     .toggle-dark { background:var(--toggle-bg); border:none; padding:.5rem; margin-left:1rem; border-radius:50%; cursor:pointer; color:var(--text); }
 
+    .language-picker { display:flex; align-items:center; gap:0.4rem; margin-left:1rem; font-size:0.85rem; }
+    #language-select { max-width:180px; padding:0.4rem; border:1px solid var(--water-border); border-radius:6px; background:#203a43; color:#fff; font:inherit; cursor:pointer; }
+    #language-select:focus-visible { outline:2px solid #4fc3f7; outline-offset:2px; }
+    .navbar { height:auto; min-height:48px; flex-wrap:wrap; gap:0.4rem; }
+    .text p { white-space:pre-line; }
+    @media (max-width:768px) { .language-picker { margin-left:0; } .hero { padding-top:8rem; } }
+
     /* scroll progress */
     #scroll-progress { position: fixed; top:0; left:0; height:4px; background:#4fc3f7; width:0; z-index:11; }
     /* back to top */
@@ -201,6 +208,18 @@
       <a href="#sobre-mim">Eu</a>
 	  <a href="#tributo">Homenagem</a>
     </div>
+    <div class="language-picker">
+      <label id="language-label" for="language-select">Idioma</label>
+      <select id="language-select" aria-label="Idioma">
+        <option value="auto">Automático (país)</option>
+        <option value="en" lang="en">English</option>
+        <option value="fr" lang="fr">Français</option>
+        <option value="ru" lang="ru">Русский</option>
+        <option value="pt" lang="pt">Português</option>
+        <option value="es" lang="es">Español</option>
+        <option value="zh" lang="zh">中文</option>
+      </select>
+    </div>
     <div id="tracker"></div>
     <button class="toggle-dark" id="toggle-dark">🌓</button>
   </nav>
@@ -295,6 +314,7 @@
 
   <audio id="pop-sound" src="pop.mp3" preload="auto"></audio>
 
+<script src="js/language.js"></script>
 <script>
   // configs
   const remImagesLight = ['0.png','1.png','2.png','3.png','4.png','5.png','6.png','7.png'];
